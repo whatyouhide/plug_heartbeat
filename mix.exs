@@ -13,6 +13,7 @@ defmodule PlugHeartbeat.Mixfile do
      elixir: "~> 1.0",
      deps: deps,
      description: @description,
+     name: "Plug Heartbeat",
      source_url: @github_url,
      package: package]
   end
@@ -22,14 +23,14 @@ defmodule PlugHeartbeat.Mixfile do
   end
 
   defp deps do
-    [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 0.10.0"},
+    [{:cowboy, "~> 1.0"},
+     {:plug, "~> 0.9"},
      {:earmark, "~> 0.1", only: :docs},
      {:ex_doc, "~> 0.7", only: :docs}]
   end
 
   defp package do
-    [contributos: ["Andrea Leopardi"],
+    [contributors: ["Andrea Leopardi"],
      licenses: ["MIT"],
      links: %{"GitHub" => @github_url}]
   end
