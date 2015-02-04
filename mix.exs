@@ -1,4 +1,4 @@
-defmodule PlugHeartbeat.Mixfile do
+defmodule Heartbeat.Mixfile do
   use Mix.Project
 
   @version "0.1.0"
