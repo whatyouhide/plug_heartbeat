@@ -1,10 +1,10 @@
-defmodule Heartbeat.Mixfile do
+defmodule PlugHeartbeat.Mixfile do
   use Mix.Project
 
   @version "0.1.0"
   @github_url "https://github.com/whatyouhide/plug_heartbeat"
   @description """
-  A plug for responding to heartbeat requests.
+  A tiny plug for responding to heartbeat requests.
   """
 
   def project do
@@ -13,7 +13,7 @@ defmodule Heartbeat.Mixfile do
      elixir: "~> 1.0",
      deps: deps,
      description: @description,
-     name: "Plug Heartbeat",
+     name: "PlugHeartbeat",
      source_url: @github_url,
      package: package]
   end

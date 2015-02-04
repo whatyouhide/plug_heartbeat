@@ -1,4 +1,4 @@
-# Heartbeat
+# PlugHeartbeat
 
 [![Build Status](https://travis-ci.org/whatyouhide/plug_heartbeat.svg?branch=master)](https://travis-ci.org/whatyouhide/plug_heartbeat)
 
@@ -25,7 +25,7 @@ Just plug this plug (sorry) in your plug pipeline:
 ```elixir
 defmodule MyServer do
   use Plug.Builder
-  plug Heartbeat
+  plug PlugHeartbeat
   # ... rest of the pipeline
 end
 ```
@@ -37,7 +37,7 @@ With this setup, all `GET` and `HEAD` requests to `/heartbeat` will return a
 ```elixir
 defmodule MyServer do
   use Plug.Builder
-  plug Heartbeat, path: "/health"
+  plug PlugHeartbeat, path: "/health"
   # ... rest of the pipeline
 end
 ```

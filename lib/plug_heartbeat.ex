@@ -1,4 +1,4 @@
-defmodule Heartbeat do
+defmodule PlugHeartbeat do
   @default_path "/heartbeat"
 
   @moduledoc """

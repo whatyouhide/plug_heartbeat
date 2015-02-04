@@ -1,10 +1,10 @@
-defmodule HeartbeatTest do
+defmodule PlugHeartbeatTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
   defmodule DefaultPath do
     use Plug.Router
-    plug Heartbeat
+    plug PlugHeartbeat
     plug :match
     plug :dispatch
     match _, do: send_resp(conn, 200, "match")
@@ -12,7 +12,7 @@ defmodule HeartbeatTest do
 
   defmodule CustomPath do
     use Plug.Router
-    plug Heartbeat, path: "/custom-beat"
+    plug PlugHeartbeat, path: "/custom-beat"
     plug :match
     plug :dispatch
     match _, do: send_resp(conn, 200, "match")
@@ -20,7 +20,7 @@ defmodule HeartbeatTest do
 
   defmodule Halted do
     use Plug.Router
-    plug Heartbeat
+    plug PlugHeartbeat
     plug :match
     plug :dispatch
     plug :body_after
