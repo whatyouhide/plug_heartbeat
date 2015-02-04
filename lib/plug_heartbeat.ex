@@ -21,7 +21,7 @@ defmodule PlugHeartbeat do
 
       defmodule MyServer do
         use Plug.Builder
-        plug Heartbeat
+        plug PlugHeartbeat
 
         # ... rest of the pipeline
       end
@@ -30,7 +30,7 @@ defmodule PlugHeartbeat do
 
       defmodule MyServer do
         use Plug.Builder
-        plug Heartbeat, path: "/health"
+        plug PlugHeartbeat, path: "/health"
 
         # ... rest of the pipeline
       end

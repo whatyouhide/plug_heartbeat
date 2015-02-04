@@ -4,7 +4,7 @@ defmodule PlugHeartbeat.Mixfile do
   @version "0.1.0"
   @github_url "https://github.com/whatyouhide/plug_heartbeat"
   @description """
-  A tiny plug for responding to heartbeat requests.
+  A tiny plug for responding to heartbeat requests
   """
 
   def project do
