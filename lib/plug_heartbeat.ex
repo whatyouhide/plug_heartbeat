@@ -45,7 +45,7 @@ defmodule PlugHeartbeat do
   def init([path: _path] = opts), do: opts
 
   def call(%Plug.Conn{} = conn, opts) do
-    if full_path(conn) == opts[:path] and conn.method in ["GET", "HEAD"] do
+    if conn.request_path == opts[:path] and conn.method in ["GET", "HEAD"] do
       conn |> halt |> send_resp(200, "OK")
     else
       conn
