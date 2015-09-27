@@ -30,6 +30,14 @@ defmodule PlugHeartbeatTest do
     match _, do: send_resp(conn, 200, "match")
   end
 
+  defmodule JSON do
+    use Plug.Router
+    plug PlugHeartbeat, json: true
+    plug :match
+    plug :dispatch
+    match _, do: send_resp(conn, 200, "match")
+  end
+
   test "default path" do
     conn = conn(:get, "/heartbeat") |> DefaultPath.call([])
     assert conn.status == 200
@@ -62,13 +70,18 @@ defmodule PlugHeartbeatTest do
     end
   end
 
-  test "only matching requests are halted" do
-    assert_passes_through_to(DefaultPath)
-    assert_passes_through_to(CustomPath)
+  test "JSON heartbeat" do
+    conn = conn(:get, "/heartbeat") |> JSON.call([])
+    assert conn.resp_body == "{}"
+    assert (conn |> get_resp_header("content-type") |> hd) =~ "application/json"
   end
 
-  defp assert_passes_through_to(plug) do
-    conn = conn(:get, "/passthrough") |> plug.call([])
+  test "only matching requests are halted" do
+    conn = conn(:get, "/passthrough") |> DefaultPath.call([])
+    assert conn.status == 200
+    assert conn.resp_body == "match"
+
+    conn = conn(:get, "/passthrough") |> CustomPath.call([])
     assert conn.status == 200
     assert conn.resp_body == "match"
   end
