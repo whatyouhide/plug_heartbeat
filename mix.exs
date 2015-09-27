@@ -30,7 +30,7 @@ defmodule PlugHeartbeat.Mixfile do
   end
 
   defp package do
-    [contributors: ["Andrea Leopardi"],
+    [maintainers: ["Andrea Leopardi"],
      licenses: ["MIT"],
      links: %{"GitHub" => @github_url}]
   end
