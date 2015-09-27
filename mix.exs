@@ -24,7 +24,7 @@ defmodule PlugHeartbeat.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0"},
-     {:plug, "~> 0.9"},
+     {:plug, "~> 1.0"},
      {:earmark, "~> 0.1", only: :docs},
      {:ex_doc, "~> 0.7", only: :docs}]
   end
