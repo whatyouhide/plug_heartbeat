@@ -17,6 +17,15 @@ defmodule PlugHeartbeat do
   Read more about halting connections in the [docs for
   `Plug.Builder`](http://hexdocs.pm/plug/Plug.Builder.html).
 
+  ## Options
+
+  The following options can be used when calling `plug PlugHeartbeat`.
+
+    * `:path` - a string expressing the path on which `PlugHeartbeat` will be mounted to
+      respond to heartbeat requests
+    * `:json` - a boolean which determines whether the response will be an
+      `application/json` response (if `true`) or a regular response.
+
   ## Examples
 
       defmodule MyServer do
@@ -40,15 +49,19 @@ defmodule PlugHeartbeat do
   @behaviour Plug
   import Plug.Conn
 
-
-  def init([]), do: [path: @default_path]
-  def init([path: _path] = opts), do: opts
+  def init(opts),
+    do: Keyword.merge([path: @default_path, json: false], opts)
 
   def call(%Plug.Conn{} = conn, opts) do
-    if full_path(conn) == opts[:path] and conn.method in ["GET", "HEAD"] do
-      conn |> halt |> send_resp(200, "OK")
+    if conn.request_path == opts[:path] and conn.method in ~w(GET HEAD) do
+      conn |> halt |> send_beat(opts[:json])
     else
       conn
     end
   end
+
+  defp send_beat(conn, false = _json),
+    do: send_resp(conn, 200, "OK")
+  defp send_beat(conn, true = _json),
+    do: conn |> put_resp_content_type("application/json") |> send_resp(200, "{}")
 end
