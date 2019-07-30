@@ -11,11 +11,11 @@ defmodule PlugHeartbeat.Mixfile do
     [app: :plug_heartbeat,
      version: @version,
      elixir: "~> 1.0",
-     deps: deps,
+     deps: deps(),
      description: @description,
      name: "PlugHeartbeat",
      source_url: @github_url,
-     package: package]
+     package: package()]
   end
 
   def application do
