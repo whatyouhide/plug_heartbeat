@@ -1,7 +1,7 @@
 defmodule PlugHeartbeat.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
   @github_url "https://github.com/whatyouhide/plug_heartbeat"
   @description """
   A tiny plug for responding to heartbeat requests
