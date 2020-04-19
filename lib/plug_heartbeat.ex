@@ -62,6 +62,7 @@ defmodule PlugHeartbeat do
 
   defp send_beat(conn, false = _json),
     do: send_resp(conn, 200, "OK")
+
   defp send_beat(conn, true = _json),
     do: conn |> put_resp_content_type("application/json") |> send_resp(200, "{}")
 end

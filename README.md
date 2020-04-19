@@ -12,7 +12,7 @@ Add a dependency to your application's `mix.exs` file:
 
 ```elixir
 defp deps do
-  [{:plug_heartbeat, "~> 0.1"}]
+  [{:plug_heartbeat, "~> 1.0"}]
 end
 ```
 

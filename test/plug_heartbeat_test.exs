@@ -4,38 +4,38 @@ defmodule PlugHeartbeatTest do
 
   defmodule DefaultPath do
     use Plug.Router
-    plug PlugHeartbeat
-    plug :match
-    plug :dispatch
-    match _, do: send_resp(conn, 200, "match")
+    plug(PlugHeartbeat)
+    plug(:match)
+    plug(:dispatch)
+    match(_, do: send_resp(conn, 200, "match"))
   end
 
   defmodule CustomPath do
     use Plug.Router
-    plug PlugHeartbeat, path: "/custom-beat"
-    plug :match
-    plug :dispatch
-    match _, do: send_resp(conn, 200, "match")
+    plug(PlugHeartbeat, path: "/custom-beat")
+    plug(:match)
+    plug(:dispatch)
+    match(_, do: send_resp(conn, 200, "match"))
   end
 
   defmodule Halted do
     use Plug.Router
-    plug PlugHeartbeat
-    plug :match
-    plug :dispatch
-    plug :body_after
+    plug(PlugHeartbeat)
+    plug(:match)
+    plug(:dispatch)
+    plug(:body_after)
 
     defp body_after(conn, _opts), do: %{conn | resp_body: "after"}
 
-    match _, do: send_resp(conn, 200, "match")
+    match(_, do: send_resp(conn, 200, "match"))
   end
 
   defmodule JSON do
     use Plug.Router
-    plug PlugHeartbeat, json: true
-    plug :match
-    plug :dispatch
-    match _, do: send_resp(conn, 200, "match")
+    plug(PlugHeartbeat, json: true)
+    plug(:match)
+    plug(:dispatch)
+    match(_, do: send_resp(conn, 200, "match"))
   end
 
   test "default path" do
@@ -64,16 +64,16 @@ defmodule PlugHeartbeatTest do
   end
 
   test "only GET and HEAD requests work" do
-    Enum.each [:post, :put, :delete, :options, :foo], fn(method) ->
+    Enum.each([:post, :put, :delete, :options, :foo], fn method ->
       conn = conn(method, "/heartbeat") |> DefaultPath.call([])
       assert conn.resp_body == "match"
-    end
+    end)
   end
 
   test "JSON heartbeat" do
     conn = conn(:get, "/heartbeat") |> JSON.call([])
     assert conn.resp_body == "{}"
-    assert (conn |> get_resp_header("content-type") |> hd) =~ "application/json"
+    assert conn |> get_resp_header("content-type") |> hd =~ "application/json"
   end
 
   test "only matching requests are halted" do
