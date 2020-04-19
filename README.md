@@ -1,6 +1,6 @@
 # PlugHeartbeat
 
-[![Build Status](https://travis-ci.org/whatyouhide/plug_heartbeat.svg?branch=master)](https://travis-ci.org/whatyouhide/plug_heartbeat)
+![](https://github.com/whatyouhide/plug_heartbeat/workflows/CI/badge.svg)
 
 A tiny plug for responding to heartbeat requests.
 
