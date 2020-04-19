@@ -9,7 +9,7 @@ defmodule PlugHeartbeat.Mixfile do
     [
       app: :plug_heartbeat,
       version: @version,
-      elixir: "~> 1.6",
+      elixir: "~> 1.8",
       deps: deps(),
       description: @description,
       name: "PlugHeartbeat",
