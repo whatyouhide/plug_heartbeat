@@ -44,6 +44,9 @@ defmodule PlugHeartbeat do
         # ... rest of the pipeline
       end
 
+  Note that if using a web stack such as the Phoenix Framework, PlugHeartbeat should be placed in
+  the main plug pipeline in `lib/myapp_web/endpoint.ex` (or equivalent), rather than in a `pipeline`
+  block in `router.ex`, so that it is run  early enough and can match all requests.
   """
 
   @behaviour Plug
